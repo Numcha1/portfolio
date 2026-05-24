@@ -1,4 +1,4 @@
-﻿import { ABOUT_POINTS } from "@/data/site";
+﻿import { ABOUT_INTRO, ABOUT_POINTS } from "@/data/site";
 import { Reveal } from "@/components/ui/Reveal";
 
 export const AboutSection = ({ id }: { id?: string }) => {
@@ -6,6 +6,8 @@ export const AboutSection = ({ id }: { id?: string }) => {
     <section id={id} className="section-shell section-anchor">
       <Reveal className="panel">
         <h2 className="font-heading text-2xl font-semibold text-white sm:text-3xl">About Me</h2>
+
+        <p className="mt-4 text-sm leading-relaxed text-muted sm:text-base">{ABOUT_INTRO}</p>
 
         <ul className="mt-6 space-y-3">
           {ABOUT_POINTS.map((point) => (
