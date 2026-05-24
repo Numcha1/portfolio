@@ -4,6 +4,5 @@
   description: string;
   techStack: string[];
   githubUrl: string;
-  demoUrl: string;
   imageUrl: string;
 };

@@ -36,7 +36,6 @@ Fields:
 - `description`
 - `tech_stack` or `techStack`
 - `github_url` or `githubUrl`
-- `demo_url` or `demoUrl`
 - `image_url` or `imageUrl`
 
 ## Setup

@@ -29,7 +29,6 @@ const mapProject = (snapshot: QueryDocumentSnapshot<DocumentData>): Project => {
       ? data.techStack.filter((item: unknown): item is string => typeof item === "string")
       : [],
     githubUrl: data.githubUrl ?? "",
-    demoUrl: data.demoUrl ?? "",
     imageUrl: data.imageUrl ?? ""
   };
 };

@@ -15,8 +15,6 @@ type RawProjectRow = {
   tech_stack?: string[] | string | null;
   githubUrl?: string | null;
   github_url?: string | null;
-  demoUrl?: string | null;
-  demo_url?: string | null;
   imageUrl?: string | null;
   image_url?: string | null;
   createdAt?: string | null;
@@ -71,7 +69,6 @@ export const useProjects = () => {
                     .filter(Boolean)
                 : [],
             githubUrl: String(item.githubUrl ?? item.github_url ?? ""),
-            demoUrl: String(item.demoUrl ?? item.demo_url ?? ""),
             imageUrl: normalizeProjectImageUrl(String(item.imageUrl ?? item.image_url ?? ""), title),
             createdAt: Number.isNaN(parsedCreatedAt) ? 0 : parsedCreatedAt
           };
@@ -109,7 +106,6 @@ export const useProjects = () => {
           description: project.description,
           techStack: project.techStack,
           githubUrl: project.githubUrl,
-          demoUrl: project.demoUrl,
           imageUrl: project.imageUrl
         }));
 

@@ -7,7 +7,6 @@ export const SAMPLE_PROJECTS: Project[] = [
     description: "ระบบจัดเก็บข้อมูลผู้ป่วยและวิเคราะห์โรค",
     techStack: ["FastAPI", "PostgreSQL", "Docker", "Next.js"],
     githubUrl: "https://github.com/Numcha1/healthchain-emr",
-    demoUrl: "",
     imageUrl: "/emr-system.png"
   },
   {
@@ -16,7 +15,6 @@ export const SAMPLE_PROJECTS: Project[] = [
     description: "ระบบจัดการงานซ่อมและอะไหล่ พร้อมติดตามสถานะงานและสต็อก",
     techStack: ["PHP", "MySQL", "HTML", "CSS"],
     githubUrl: "https://github.com/Numcha1/Repair-and-Spare-Parts-Inventory-Management-System",
-    demoUrl: "",
     imageUrl: "/repair-and-spare.png"
   },
   {
@@ -25,7 +23,6 @@ export const SAMPLE_PROJECTS: Project[] = [
     description: "ระบบติดตามความคืบหน้าโครงการ จัดการงาน และสรุปรายงานผล",
     techStack: ["PHP", "MySQL", "JavaScript"],
     githubUrl: "https://github.com/Numcha1/Project-Management-and-Progress-Tracking-System-A-Case-Study",
-    demoUrl: "",
     imageUrl: "/project-milestone-monitor.png"
   }
 ];

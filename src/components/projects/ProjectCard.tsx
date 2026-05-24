@@ -58,14 +58,6 @@ export const ProjectCard = ({ project, priority = false, delay = 0 }: ProjectCar
             ) : (
               <span className="btn-secondary cursor-not-allowed opacity-50">GitHub</span>
             )}
-
-            {project.demoUrl ? (
-              <a href={project.demoUrl} target="_blank" rel="noreferrer" className="btn-primary">
-                Demo
-              </a>
-            ) : (
-              <span className="btn-primary cursor-not-allowed opacity-50">Demo</span>
-            )}
           </div>
         </div>
       </article>
