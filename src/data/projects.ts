@@ -6,7 +6,7 @@ export const SAMPLE_PROJECTS: Project[] = [
     title: "EMR SYSTEM",
     description: "ระบบจัดเก็บข้อมูลผู้ป่วยและวิเคราะห์โรค",
     techStack: ["FastAPI", "PostgreSQL", "Docker", "Next.js"],
-    githubUrl: "https://github.com/your-username/emr-project",
+    githubUrl: "https://github.com/Numcha1/healthchain-emr",
     demoUrl: "https://your-demo-url.com/emr",
     imageUrl: "/project-placeholder.svg"
   },
