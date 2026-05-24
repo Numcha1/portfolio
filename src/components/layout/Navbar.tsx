@@ -1,7 +1,5 @@
 ﻿import Link from "next/link";
 
-import { SOCIAL_LINKS } from "@/data/site";
-
 const NAV_ITEMS = [
   { label: "Home", href: "/#home" },
   { label: "About", href: "/#about" },
@@ -27,19 +25,6 @@ export const Navbar = () => {
           ))}
         </nav>
 
-        <nav className="hidden items-center gap-3 sm:flex">
-          {SOCIAL_LINKS.map((social) => (
-            <Link
-              key={social.label}
-              href={social.href}
-              target="_blank"
-              rel="noreferrer"
-              className="text-sm text-muted hover:text-white"
-            >
-              {social.label}
-            </Link>
-          ))}
-        </nav>
       </div>
     </header>
   );
