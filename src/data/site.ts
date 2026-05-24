@@ -39,23 +39,23 @@ export const ABOUT_INTRO =
 export const SKILL_GROUPS: SkillGroup[] = [
   {
     title: "Frontend",
-    skills: ["HTML", "CSS", "JavaScript", "Next.js", "Tailwind CSS"]
+    skills: ["HTML,", "CSS,", "JavaScript,", "Next.js,", "Tailwind CSS"]
   },
   {
     title: "Backend",
-    skills: ["PHP", "Python", "FastAPI", "Node.js"]
+    skills: ["PHP,", "Python,", "FastAPI,", "Node.js"]
   },
   {
     title: "Database",
-    skills: ["MySQL", "PostgreSQL", "Supabase"]
+    skills: ["MySQL,", "PostgreSQL,", "Supabase"]
   },
   {
     title: "Tools",
-    skills: ["GitHub", "Docker", "Figma", "VS Code"]
+    skills: ["GitHub,", "Docker,", "Figma,", "VS Code"]
   },
   {
     title: "SoftSkills",
-    skills: ["Problem Solving", "Teamwork", "Adaptability", "Fast Learner", "Responsibility"]
+    skills: ["Problem Solving,", "Teamwork,", "Adaptability,", "Fast Learner,", "Responsibility"]
   }
 ];
 
