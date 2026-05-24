@@ -59,9 +59,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${headingFont.variable} ${bodyFont.variable}`}>
-        <div className="relative flex min-h-screen flex-col overflow-x-hidden">
-          <div className="pointer-events-none absolute -top-28 left-10 h-72 w-72 animate-pulseGlow rounded-full bg-primary/30 blur-3xl" />
-          <div className="pointer-events-none absolute right-12 top-16 h-56 w-56 animate-floaty rounded-full bg-primarySoft/20 blur-3xl" />
+        <div className="flex min-h-screen flex-col overflow-x-hidden">
           <Navbar />
           <main className="page-wrap">{children}</main>
           <Footer />

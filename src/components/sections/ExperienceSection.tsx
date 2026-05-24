@@ -5,7 +5,7 @@ export const ExperienceSection = ({ id }: { id?: string }) => {
   return (
     <section id={id} className="section-shell section-anchor">
       <Reveal className="panel">
-        <h2 className="font-heading text-2xl font-bold text-white sm:text-3xl">EXPERIENCE</h2>
+        <h2 className="font-heading text-2xl font-semibold text-white sm:text-3xl">Experience</h2>
 
         <ul className="mt-6 space-y-3">
           {EXPERIENCE_ITEMS.map((item) => (

@@ -14,14 +14,14 @@ export const ProjectCard = ({ project, priority = false, delay = 0 }: ProjectCar
 
   return (
     <Reveal delay={delay}>
-      <article className="group overflow-hidden rounded-2xl border border-border/70 bg-surface/70 shadow-card transition-transform duration-300 hover:-translate-y-1">
-        <div className="relative h-52 overflow-hidden">
+      <article className="overflow-hidden rounded-2xl border border-border/70 bg-surface/70 shadow-soft">
+        <div className="relative h-52 overflow-hidden border-b border-border/60">
           <Image
             src={imageSrc}
             alt={`${project.title} preview`}
             fill
             priority={priority}
-            className="object-cover transition-transform duration-500 group-hover:scale-105"
+            className="object-cover"
           />
         </div>
 
@@ -34,12 +34,7 @@ export const ProjectCard = ({ project, priority = false, delay = 0 }: ProjectCar
 
           <div className="flex flex-wrap gap-2 pt-1">
             {project.githubUrl ? (
-              <a
-                href={project.githubUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="btn-secondary"
-              >
+              <a href={project.githubUrl} target="_blank" rel="noreferrer" className="btn-secondary">
                 GitHub
               </a>
             ) : (

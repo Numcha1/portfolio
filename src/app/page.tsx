@@ -11,7 +11,7 @@ export default function HomePage() {
       <HeroSection />
       <AboutSection id="about" />
       <SkillsSection id="skills" />
-      <ProjectsSection id="projects" limit={3} heading="PROJECTS ⭐" showViewAll />
+      <ProjectsSection id="projects" limit={3} heading="Projects" showViewAll />
       <ExperienceSection id="experience" />
       <ContactSection id="contact" />
     </>

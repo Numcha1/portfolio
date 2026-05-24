@@ -7,7 +7,7 @@ export const ContactSection = ({ id }: { id?: string }) => {
   return (
     <section id={id} className="section-shell section-anchor">
       <Reveal className="panel">
-        <h2 className="font-heading text-2xl font-bold text-white sm:text-3xl">CONTACT</h2>
+        <h2 className="font-heading text-2xl font-semibold text-white sm:text-3xl">Contact</h2>
 
         <div className="mt-6 flex flex-wrap gap-3">
           <Link href={`mailto:${SITE_CONFIG.email}`} className="chip hover:text-white">
