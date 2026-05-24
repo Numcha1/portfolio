@@ -2,6 +2,15 @@
 
 export const SAMPLE_PROJECTS: Project[] = [
   {
+    id: "emr-system",
+    title: "EMR SYSTEM",
+    description: "ระบบจัดเก็บข้อมูลผู้ป่วยและวิเคราะห์โรค",
+    techStack: ["FastAPI", "PostgreSQL", "Docker", "Next.js"],
+    githubUrl: "https://github.com/Numcha1/healthchain-emr",
+    demoUrl: "",
+    imageUrl: "/project-placeholder.svg"
+  },
+  {
     id: "repair-and-spare",
     title: "REPAIR-AND-SPARE",
     description: "ระบบจัดการงานซ่อมและอะไหล่ พร้อมติดตามสถานะงานและสต็อก",
