@@ -17,7 +17,7 @@ export const SAMPLE_PROJECTS: Project[] = [
     techStack: ["PHP", "MySQL", "HTML", "CSS"],
     githubUrl: "https://github.com/Numcha1/Repair-and-Spare-Parts-Inventory-Management-System",
     demoUrl: "",
-    imageUrl: "/project-placeholder.svg"
+    imageUrl: "/repair-and-spare.png"
   },
   {
     id: "project-management",

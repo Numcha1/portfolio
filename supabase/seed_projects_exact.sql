@@ -22,7 +22,7 @@ values
   'PHP, MySQL, HTML, CSS',
   'https://github.com/Numcha1/Repair-and-Spare-Parts-Inventory-Management-System',
   '',
-  '/project-placeholder.svg'
+  '/repair-and-spare.png'
 ),
 (
   'PROJECT-MANAGEMENT',
