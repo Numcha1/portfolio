@@ -33,6 +33,8 @@ const toSafeImageUrl = (value: string) => {
   return isHttp || isLocalPath ? raw : "/project-placeholder.svg";
 };
 
+const normalizeTitle = (value: string) => value.trim().toLowerCase();
+
 export const useProjects = () => {
   const [projects, setProjects] = useState<Project[]>(SAMPLE_PROJECTS);
 
@@ -71,11 +73,23 @@ export const useProjects = () => {
           };
         });
 
+        const seenTitles = new Set<string>();
+        const uniqueProjects = mappedProjects.filter((project) => {
+          const key = normalizeTitle(project.title);
+
+          if (!key || seenTitles.has(key)) {
+            return false;
+          }
+
+          seenTitles.add(key);
+          return true;
+        });
+
         if (!mounted) {
           return;
         }
 
-        setProjects(mappedProjects.length > 0 ? mappedProjects : SAMPLE_PROJECTS);
+        setProjects(uniqueProjects.length > 0 ? uniqueProjects : SAMPLE_PROJECTS);
       } catch (err) {
         console.error("Unexpected projects loader error:", err);
       }
