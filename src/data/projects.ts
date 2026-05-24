@@ -2,30 +2,21 @@
 
 export const SAMPLE_PROJECTS: Project[] = [
   {
-    id: "emr-system",
-    title: "EMR SYSTEM",
-    description: "ระบบจัดเก็บข้อมูลผู้ป่วยและวิเคราะห์โรค",
-    techStack: ["FastAPI", "PostgreSQL", "Docker", "Next.js"],
-    githubUrl: "https://github.com/Numcha1/healthchain-emr",
-    demoUrl: "https://your-demo-url.com/emr",
-    imageUrl: "/project-placeholder.svg"
-  },
-  {
-    id: "beauty-salon-pos",
-    title: "BEAUTY SALON POS",
-    description: "ระบบสมาชิก ระบบจอง ระบบสต็อก",
+    id: "repair-and-spare",
+    title: "REPAIR-AND-SPARE",
+    description: "ระบบจัดการงานซ่อมและอะไหล่ พร้อมติดตามสถานะงานและสต็อก",
     techStack: ["PHP", "MySQL", "HTML", "CSS"],
-    githubUrl: "https://github.com/your-username/beauty-salon-pos",
-    demoUrl: "https://your-demo-url.com/beauty-salon-pos",
+    githubUrl: "https://github.com/Numcha1/Repair-and-Spare-Parts-Inventory-Management-System",
+    demoUrl: "",
     imageUrl: "/project-placeholder.svg"
   },
   {
-    id: "fusion-splicer-stock",
-    title: "FUSION SPLICER STOCK SYSTEM",
-    description: "ระบบจัดการอุปกรณ์และอะไหล่",
-    techStack: ["PHP", "MySQL"],
-    githubUrl: "https://github.com/your-username/fusion-splicer-stock",
-    demoUrl: "https://your-demo-url.com/fusion-stock",
+    id: "project-management",
+    title: "PROJECT-MANAGEMENT",
+    description: "ระบบติดตามความคืบหน้าโครงการ จัดการงาน และสรุปรายงานผล",
+    techStack: ["PHP", "MySQL", "JavaScript"],
+    githubUrl: "https://github.com/Numcha1/Project-Management-and-Progress-Tracking-System-A-Case-Study",
+    demoUrl: "",
     imageUrl: "/project-placeholder.svg"
   }
 ];
