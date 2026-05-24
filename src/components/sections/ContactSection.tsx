@@ -26,9 +26,6 @@ export const ContactSection = ({ id }: { id?: string }) => {
             </Link>
           ))}
 
-          <Link href={`tel:${SITE_CONFIG.phone.replace(/\s+/g, "")}`} className="chip hover:text-white">
-            Phone
-          </Link>
         </div>
       </Reveal>
     </section>

@@ -6,7 +6,7 @@ export const SITE_CONFIG = {
   tagline: "",
   description:
     "Portfolio website of Patiphan Meelapsuang, Full Stack and IoT Developer.",
-  email: "youremail@gmail.com",
+  email: "waterza184641@gmail.com",
   phone: "+66 00 000 0000",
   location: "Thailand",
   resumeUrl: process.env.NEXT_PUBLIC_RESUME_URL ?? "https://your-resume-link.com/resume.pdf"
@@ -21,8 +21,9 @@ export const NAV_LINKS: NavLink[] = [
 ];
 
 export const SOCIAL_LINKS: SocialLink[] = [
-  { label: "GitHub", href: "https://github.com/your-username" },
-  { label: "Facebook", href: "https://www.facebook.com/your-profile" }
+  { label: "GitHub", href: "https://github.com/Numcha1" },
+  { label: "Facebook", href: "https://www.facebook.com/patiphan.meelapsuang" },
+  { label: "Instagram", href: "https://www.instagram.com/p._.num_cha_/" }
 ];
 
 export const ABOUT_POINTS = [
