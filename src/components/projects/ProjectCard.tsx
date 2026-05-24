@@ -1,4 +1,6 @@
-﻿import Image from "next/image";
+import { useEffect, useState } from "react";
+
+import Image from "next/image";
 
 import { Reveal } from "@/components/ui/Reveal";
 import type { Project } from "@/types/project";
@@ -10,7 +12,12 @@ type ProjectCardProps = {
 };
 
 export const ProjectCard = ({ project, priority = false, delay = 0 }: ProjectCardProps) => {
-  const imageSrc = project.imageUrl || "/project-placeholder.svg";
+  const fallbackImage = "/project-placeholder.svg";
+  const [imageSrc, setImageSrc] = useState(project.imageUrl || fallbackImage);
+
+  useEffect(() => {
+    setImageSrc(project.imageUrl || fallbackImage);
+  }, [project.imageUrl]);
 
   return (
     <Reveal delay={delay}>
@@ -22,13 +29,18 @@ export const ProjectCard = ({ project, priority = false, delay = 0 }: ProjectCar
             fill
             priority={priority}
             className="object-cover"
+            onError={() => {
+              if (imageSrc !== fallbackImage) {
+                setImageSrc(fallbackImage);
+              }
+            }}
           />
         </div>
 
         <div className="space-y-4 p-5">
           <div>
             <h3 className="font-heading text-xl font-semibold text-white">{project.title}</h3>
-            <p className="mt-2 text-sm text-primarySoft">{project.techStack.join(" • ")}</p>
+            <p className="mt-2 text-sm text-primarySoft">{project.techStack.join(" | ")}</p>
             <p className="mt-2 line-clamp-3 text-sm text-muted">{project.description}</p>
           </div>
 
