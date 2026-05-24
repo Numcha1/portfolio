@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 
 import { SAMPLE_PROJECTS } from "@/data/projects";
+import { normalizeProjectImageUrl } from "@/lib/projectImage";
 import type { Project } from "@/types/project";
 import { supabase } from "../../lib/supabase";
 
@@ -20,19 +21,6 @@ type RawProjectRow = {
   image_url?: string | null;
   createdAt?: string | null;
   created_at?: string | null;
-};
-
-const toSafeImageUrl = (value: string) => {
-  const raw = value.trim();
-
-  if (!raw) {
-    return "/project-placeholder.svg";
-  }
-
-  const isHttp = raw.startsWith("http://") || raw.startsWith("https://");
-  const isLocalPath = raw.startsWith("/");
-
-  return isHttp || isLocalPath ? raw : "/project-placeholder.svg";
 };
 
 const normalizeTitle = (value: string) => value.trim().toLowerCase();
@@ -68,10 +56,11 @@ export const useProjects = () => {
           const techValue = item.techStack ?? item.tech_stack;
           const createdAtRaw = item.createdAt ?? item.created_at;
           const parsedCreatedAt = createdAtRaw ? Date.parse(createdAtRaw) : NaN;
+          const title = String(item.title ?? "");
 
           return {
             id: String(item.id ?? ""),
-            title: String(item.title ?? ""),
+            title,
             description: String(item.description ?? ""),
             techStack: Array.isArray(techValue)
               ? techValue.filter((tech): tech is string => typeof tech === "string")
@@ -83,7 +72,7 @@ export const useProjects = () => {
                 : [],
             githubUrl: String(item.githubUrl ?? item.github_url ?? ""),
             demoUrl: String(item.demoUrl ?? item.demo_url ?? ""),
-            imageUrl: toSafeImageUrl(String(item.imageUrl ?? item.image_url ?? "")),
+            imageUrl: normalizeProjectImageUrl(String(item.imageUrl ?? item.image_url ?? ""), title),
             createdAt: Number.isNaN(parsedCreatedAt) ? 0 : parsedCreatedAt
           };
         });

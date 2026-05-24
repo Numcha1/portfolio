@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 
-import Image from "next/image";
-
 import { Reveal } from "@/components/ui/Reveal";
+import { getProjectImageFallback } from "@/lib/projectImage";
 import type { Project } from "@/types/project";
 
 type ProjectCardProps = {
@@ -12,26 +11,33 @@ type ProjectCardProps = {
 };
 
 export const ProjectCard = ({ project, priority = false, delay = 0 }: ProjectCardProps) => {
-  const fallbackImage = "/project-placeholder.svg";
-  const [imageSrc, setImageSrc] = useState(project.imageUrl || fallbackImage);
+  const defaultFallback = getProjectImageFallback(project.title);
+  const [imageSrc, setImageSrc] = useState(project.imageUrl || defaultFallback);
+  const [hasUsedDefaultFallback, setHasUsedDefaultFallback] = useState(false);
 
   useEffect(() => {
-    setImageSrc(project.imageUrl || fallbackImage);
-  }, [project.imageUrl]);
+    setImageSrc(project.imageUrl || defaultFallback);
+    setHasUsedDefaultFallback(false);
+  }, [project.imageUrl, defaultFallback]);
 
   return (
     <Reveal delay={delay}>
       <article className="overflow-hidden rounded-2xl border border-border/70 bg-surface/70 shadow-soft">
         <div className="relative h-52 overflow-hidden border-b border-border/60">
-          <Image
+          <img
             src={imageSrc}
             alt={`${project.title} preview`}
-            fill
-            priority={priority}
-            className="object-cover"
+            loading={priority ? "eager" : "lazy"}
+            className="h-full w-full object-cover"
             onError={() => {
-              if (imageSrc !== fallbackImage) {
-                setImageSrc(fallbackImage);
+              if (!hasUsedDefaultFallback && imageSrc !== defaultFallback) {
+                setImageSrc(defaultFallback);
+                setHasUsedDefaultFallback(true);
+                return;
+              }
+
+              if (imageSrc !== "/project-placeholder.svg") {
+                setImageSrc("/project-placeholder.svg");
               }
             }}
           />
