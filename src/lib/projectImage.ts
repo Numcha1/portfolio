@@ -21,6 +21,12 @@ export const getProjectImageFallback = (title: string) => {
 export const normalizeProjectImageUrl = (value: string, title: string) => {
   const raw = value.trim();
   const fallback = getProjectImageFallback(title);
+  const hasFixedLocalImage = fallback !== "/project-placeholder.svg";
+
+  // For known portfolio projects, always use the local image to avoid broken DB URLs.
+  if (hasFixedLocalImage) {
+    return fallback;
+  }
 
   if (!raw) {
     return fallback;

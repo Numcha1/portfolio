@@ -103,14 +103,23 @@ export const useProjects = () => {
         }
 
         const uniqueProjects = Array.from(seenTitles.values());
+        const uniqueProjectsWithoutMeta: Project[] = uniqueProjects.map((project) => ({
+          id: project.id,
+          title: project.title,
+          description: project.description,
+          techStack: project.techStack,
+          githubUrl: project.githubUrl,
+          demoUrl: project.demoUrl,
+          imageUrl: project.imageUrl
+        }));
 
         if (!mounted) {
           return;
         }
 
         setProjects(
-          uniqueProjects.length > 0
-            ? uniqueProjects.map(({ createdAt: _createdAt, ...project }) => project)
+          uniqueProjectsWithoutMeta.length > 0
+            ? uniqueProjectsWithoutMeta
             : SAMPLE_PROJECTS
         );
       } catch (err) {
