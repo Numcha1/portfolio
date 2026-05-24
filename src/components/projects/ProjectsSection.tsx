@@ -21,7 +21,7 @@ export const ProjectsSection = ({
   limit,
   showViewAll = false
 }: ProjectsSectionProps) => {
-  const { projects } = useProjects();
+  const { projects, isLoading } = useProjects({ limit });
 
   return (
     <section id={id} className="section-shell section-anchor">
@@ -39,7 +39,7 @@ export const ProjectsSection = ({
           )}
         </div>
 
-        <ProjectGrid projects={projects} limit={limit} />
+        <ProjectGrid projects={projects} isLoading={isLoading} limit={limit} />
       </Reveal>
     </section>
   );

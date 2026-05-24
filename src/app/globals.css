@@ -26,6 +26,29 @@ a {
   color: #ffffff;
 }
 
+.reveal-shell {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.45s ease,
+    transform 0.45s ease;
+  transition-delay: var(--reveal-delay, 0s);
+  will-change: opacity, transform;
+}
+
+.reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-shell {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
 @layer components {
   .page-wrap {
     @apply mx-auto w-full max-w-5xl flex-1 px-4 pb-16 pt-24 sm:px-6 lg:px-8;

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 import { Reveal } from "@/components/ui/Reveal";
 import { getProjectImageFallback } from "@/lib/projectImage";
@@ -24,11 +25,13 @@ export const ProjectCard = ({ project, priority = false, delay = 0 }: ProjectCar
     <Reveal delay={delay}>
       <article className="overflow-hidden rounded-2xl border border-border/70 bg-surface/70 shadow-soft">
         <div className="relative h-52 overflow-hidden border-b border-border/60">
-          <img
+          <Image
             src={imageSrc}
             alt={`${project.title} preview`}
-            loading={priority ? "eager" : "lazy"}
-            className="h-full w-full object-cover"
+            fill
+            priority={priority}
+            sizes="(min-width: 1280px) 33vw, (min-width: 768px) 50vw, 100vw"
+            className="object-cover"
             onError={() => {
               if (!hasUsedDefaultFallback && imageSrc !== defaultFallback) {
                 setImageSrc(defaultFallback);

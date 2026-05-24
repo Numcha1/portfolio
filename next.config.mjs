@@ -1,7 +1,19 @@
 /** @type {import('next').NextConfig} */
-const supabaseHostname = process.env.NEXT_PUBLIC_SUPABASE_URL
-  ? new URL(process.env.NEXT_PUBLIC_SUPABASE_URL).hostname
-  : null;
+const getSupabaseHostname = () => {
+  const rawUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+
+  if (!rawUrl) {
+    return null;
+  }
+
+  try {
+    return new URL(rawUrl).hostname;
+  } catch {
+    return null;
+  }
+};
+
+const supabaseHostname = getSupabaseHostname();
 
 const nextConfig = {
   images: {
