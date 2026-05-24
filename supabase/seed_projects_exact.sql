@@ -1,5 +1,5 @@
--- Keep only these 3 projects on host
--- EMR SYSTEM, REPAIR-AND-SPARE, PROJECT-MANAGEMENT
+﻿-- Keep only these 3 projects on host
+-- EMR SYSTEM, REPAIR-AND-SPARE, Project Milestone Monitor
 
 begin;
 
@@ -10,27 +10,28 @@ insert into public.projects
 values
 (
   'EMR SYSTEM',
-  'ระบบจัดเก็บข้อมูลผู้ป่วยและวิเคราะห์โรค',
+  'เธฃเธฐเธเธเธเธฑเธ”เน€เธเนเธเธเนเธญเธกเธนเธฅเธเธนเนเธเนเธงเธขเนเธฅเธฐเธงเธดเน€เธเธฃเธฒเธฐเธซเนเนเธฃเธ',
   'FastAPI, PostgreSQL, Docker, Next.js',
   'https://github.com/Numcha1/healthchain-emr',
   '',
-  '/project-placeholder.svg'
+  '/emr-system.png'
 ),
 (
   'REPAIR-AND-SPARE',
-  'ระบบจัดการงานซ่อมและอะไหล่ พร้อมติดตามสถานะงานและสต็อก',
+  'เธฃเธฐเธเธเธเธฑเธ”เธเธฒเธฃเธเธฒเธเธเนเธญเธกเนเธฅเธฐเธญเธฐเนเธซเธฅเน เธเธฃเนเธญเธกเธ•เธดเธ”เธ•เธฒเธกเธชเธ–เธฒเธเธฐเธเธฒเธเนเธฅเธฐเธชเธ•เนเธญเธ',
   'PHP, MySQL, HTML, CSS',
   'https://github.com/Numcha1/Repair-and-Spare-Parts-Inventory-Management-System',
   '',
   '/repair-and-spare.png'
 ),
 (
-  'PROJECT-MANAGEMENT',
-  'ระบบติดตามความคืบหน้าโครงการ จัดการงาน และสรุปรายงานผล',
+  'Project Milestone Monitor',
+  'เธฃเธฐเธเธเธ•เธดเธ”เธ•เธฒเธกเธเธงเธฒเธกเธเธทเธเธซเธเนเธฒเนเธเธฃเธเธเธฒเธฃ เธเธฑเธ”เธเธฒเธฃเธเธฒเธ เนเธฅเธฐเธชเธฃเธธเธเธฃเธฒเธขเธเธฒเธเธเธฅ',
   'PHP, MySQL, JavaScript',
   'https://github.com/Numcha1/Project-Management-and-Progress-Tracking-System-A-Case-Study',
   '',
-  '/project-placeholder.svg'
+  '/project-milestone-monitor.png'
 );
 
 commit;
+

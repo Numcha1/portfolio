@@ -8,7 +8,7 @@ export const SAMPLE_PROJECTS: Project[] = [
     techStack: ["FastAPI", "PostgreSQL", "Docker", "Next.js"],
     githubUrl: "https://github.com/Numcha1/healthchain-emr",
     demoUrl: "",
-    imageUrl: "/project-placeholder.svg"
+    imageUrl: "/emr-system.png"
   },
   {
     id: "repair-and-spare",
@@ -20,12 +20,14 @@ export const SAMPLE_PROJECTS: Project[] = [
     imageUrl: "/repair-and-spare.png"
   },
   {
-    id: "project-management",
-    title: "PROJECT-MANAGEMENT",
+    id: "project milestone monitor",
+    title: "Project Milestone Monitor",
     description: "ระบบติดตามความคืบหน้าโครงการ จัดการงาน และสรุปรายงานผล",
     techStack: ["PHP", "MySQL", "JavaScript"],
     githubUrl: "https://github.com/Numcha1/Project-Management-and-Progress-Tracking-System-A-Case-Study",
     demoUrl: "",
-    imageUrl: "/project-placeholder.svg"
+    imageUrl: "/project-milestone-monitor.png"
   }
 ];
+
+

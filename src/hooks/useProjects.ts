@@ -18,6 +18,8 @@ type RawProjectRow = {
   demo_url?: string | null;
   imageUrl?: string | null;
   image_url?: string | null;
+  createdAt?: string | null;
+  created_at?: string | null;
 };
 
 const toSafeImageUrl = (value: string) => {
@@ -34,6 +36,12 @@ const toSafeImageUrl = (value: string) => {
 };
 
 const normalizeTitle = (value: string) => value.trim().toLowerCase();
+const isPlaceholderImage = (value: string) =>
+  value.trim().endsWith("/project-placeholder.svg");
+
+type MappedProject = Project & {
+  createdAt: number;
+};
 
 export const useProjects = () => {
   const [projects, setProjects] = useState<Project[]>(SAMPLE_PROJECTS);
@@ -43,7 +51,11 @@ export const useProjects = () => {
 
     const loadProjects = async () => {
       try {
-        const { data, error } = await supabase.from("projects").select("*");
+        const { data, error } = await supabase
+          .from("projects")
+          .select("*")
+          .order("created_at", { ascending: false })
+          .order("id", { ascending: false });
 
         if (error) {
           console.error("Supabase projects query error:", error);
@@ -52,8 +64,10 @@ export const useProjects = () => {
 
         const rows = (data ?? []) as RawProjectRow[];
 
-        const mappedProjects: Project[] = rows.map((item) => {
+        const mappedProjects: MappedProject[] = rows.map((item) => {
           const techValue = item.techStack ?? item.tech_stack;
+          const createdAtRaw = item.createdAt ?? item.created_at;
+          const parsedCreatedAt = createdAtRaw ? Date.parse(createdAtRaw) : NaN;
 
           return {
             id: String(item.id ?? ""),
@@ -69,27 +83,47 @@ export const useProjects = () => {
                 : [],
             githubUrl: String(item.githubUrl ?? item.github_url ?? ""),
             demoUrl: String(item.demoUrl ?? item.demo_url ?? ""),
-            imageUrl: toSafeImageUrl(String(item.imageUrl ?? item.image_url ?? ""))
+            imageUrl: toSafeImageUrl(String(item.imageUrl ?? item.image_url ?? "")),
+            createdAt: Number.isNaN(parsedCreatedAt) ? 0 : parsedCreatedAt
           };
         });
 
-        const seenTitles = new Set<string>();
-        const uniqueProjects = mappedProjects.filter((project) => {
+        const seenTitles = new Map<string, MappedProject>();
+
+        for (const project of mappedProjects) {
           const key = normalizeTitle(project.title);
 
-          if (!key || seenTitles.has(key)) {
-            return false;
+          if (!key) {
+            continue;
           }
 
-          seenTitles.add(key);
-          return true;
-        });
+          const existing = seenTitles.get(key);
+
+          if (!existing) {
+            seenTitles.set(key, project);
+            continue;
+          }
+
+          const shouldReplace =
+            (!isPlaceholderImage(project.imageUrl) && isPlaceholderImage(existing.imageUrl)) ||
+            project.createdAt > existing.createdAt;
+
+          if (shouldReplace) {
+            seenTitles.set(key, project);
+          }
+        }
+
+        const uniqueProjects = Array.from(seenTitles.values());
 
         if (!mounted) {
           return;
         }
 
-        setProjects(uniqueProjects.length > 0 ? uniqueProjects : SAMPLE_PROJECTS);
+        setProjects(
+          uniqueProjects.length > 0
+            ? uniqueProjects.map(({ createdAt: _createdAt, ...project }) => project)
+            : SAMPLE_PROJECTS
+        );
       } catch (err) {
         console.error("Unexpected projects loader error:", err);
       }
