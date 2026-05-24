@@ -2,9 +2,8 @@
 
 export const SITE_CONFIG = {
   name: "PATIPHAN MEELAPSUANG",
-  role: "Full Stack & IoT Developer",
-  tagline:
-    "Computer Engineering & IoT Student interested in Backend, AI and System Development",
+  role: "วิศวกรรมคอมพิวเตอร์และระบบไอโอที",
+  tagline: "",
   description:
     "Portfolio website of Patiphan Meelapsuang, Full Stack and IoT Developer.",
   email: "youremail@gmail.com",

@@ -14,10 +14,6 @@ export const HeroSection = () => {
         </h1>
         <p className="mt-2 text-lg text-primarySoft">{SITE_CONFIG.role}</p>
 
-        <p className="mx-auto mt-5 max-w-2xl text-sm leading-relaxed text-muted sm:text-base">
-          {SITE_CONFIG.tagline}
-        </p>
-
         <div className="mt-7 flex flex-wrap justify-center gap-3">
           <Link href="/projects" className="btn-primary">
             View Projects
