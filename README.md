@@ -24,6 +24,7 @@ Modern portfolio website for a Computer Engineering and IoT student.
 - Reusable components
 - Projects loaded dynamically from Supabase
 - Fallback to sample projects if Supabase is not configured
+- Admin page at `/admin` for project CRUD (login required)
 
 ## Supabase Table
 
@@ -56,10 +57,17 @@ cp .env.example .env.local
 
 4. Apply policy SQL in Supabase SQL Editor
 
-- Run: `supabase/projects_public_read_policy.sql`
+- Public read only: `supabase/projects_public_read_policy.sql`
+- Public read + admin write: `supabase/projects_admin_access.sql`
+  - Replace `YOUR_ADMIN_USER_ID` in SQL before running.
+  - This keeps portfolio pages public, but only your admin account can edit.
 
 5. Run app
 
 ```bash
 npm run dev
 ```
+
+6. Open admin page
+
+- `http://localhost:3000/admin`
