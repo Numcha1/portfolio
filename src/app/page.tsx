@@ -10,7 +10,7 @@ export default function HomePage() {
       <HeroSection />
       <AboutSection id="about" />
       <SkillsSection id="skills" />
-      <ProjectsSection id="projects" limit={3} heading="Projects" showViewAll />
+      <ProjectsSection id="projects" limit={4} heading="Projects" showViewAll />
       <ContactSection id="contact" />
     </>
   );

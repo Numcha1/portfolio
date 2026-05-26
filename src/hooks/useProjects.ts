@@ -169,8 +169,28 @@ const dedupeProjects = (projects: MappedProject[]): Project[] => {
   }));
 };
 
+const mergeProjects = (primary: Project[], fallback: Project[]) => {
+  const merged = new Map<string, Project>();
+
+  for (const project of primary) {
+    merged.set(normalizeTitle(project.title), project);
+  }
+
+  for (const project of fallback) {
+    const key = normalizeTitle(project.title);
+
+    if (!merged.has(key)) {
+      merged.set(key, project);
+    }
+  }
+
+  return Array.from(merged.values());
+};
+
 export const useProjects = ({ limit }: UseProjectsOptions = {}) => {
-  const [projects, setProjects] = useState<Project[]>(() => readProjectsCache() ?? SAMPLE_PROJECTS);
+  const [projects, setProjects] = useState<Project[]>(() =>
+    mergeProjects(readProjectsCache() ?? [], SAMPLE_PROJECTS)
+  );
   const [isLoading, setIsLoading] = useState(projects.length === 0);
 
   useEffect(() => {
@@ -210,7 +230,9 @@ export const useProjects = ({ limit }: UseProjectsOptions = {}) => {
         const rows = (data ?? []) as RawProjectRow[];
         const mappedProjects = mapRowsToProjects(rows);
         const uniqueProjects = dedupeProjects(mappedProjects);
-        const finalProjects = uniqueProjects.length > 0 ? uniqueProjects : SAMPLE_PROJECTS;
+        const finalProjects = uniqueProjects.length > 0
+          ? mergeProjects(uniqueProjects, SAMPLE_PROJECTS)
+          : SAMPLE_PROJECTS;
 
         if (!mounted) {
           return;
