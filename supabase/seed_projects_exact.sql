@@ -1,5 +1,5 @@
--- Keep only these 3 projects on host:
--- EMR SYSTEM, REPAIR-AND-SPARE, Project Milestone Monitor
+-- Keep only these 4 projects on host:
+-- EMR SYSTEM, REPAIR-AND-SPARE, Project Milestone Monitor, SLON
 
 begin;
 
@@ -37,6 +37,14 @@ values
     'https://github.com/Numcha1/Project-Management-and-Progress-Tracking-System-A-Case-Study',
     '',
     '/project-milestone-monitor.png'
+  ),
+  (
+    'SLON',
+    'Salon website concept with branding and service presentation.',
+    'HTML, CSS, JavaScript',
+    'https://github.com/Numcha1/Slon',
+    '',
+    '/slon.png'
   );
 
 commit;

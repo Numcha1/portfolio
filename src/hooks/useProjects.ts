@@ -29,7 +29,7 @@ type UseProjectsOptions = {
   limit?: number;
 };
 
-const PROJECTS_CACHE_KEY = "portfolio.projects.cache.v1";
+const PROJECTS_CACHE_KEY = "portfolio.projects.cache.v2";
 const QUERY_TIMEOUT_MS = 6000;
 
 const normalizeTitle = (value: string) => value.trim().toLowerCase();

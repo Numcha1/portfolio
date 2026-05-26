@@ -24,6 +24,14 @@ export const SAMPLE_PROJECTS: Project[] = [
     techStack: ["PHP", "MySQL", "JavaScript"],
     githubUrl: "https://github.com/Numcha1/Project-Management-and-Progress-Tracking-System-A-Case-Study",
     imageUrl: "/project-milestone-monitor.png"
+  },
+  {
+    id: "slon",
+    title: "SLON",
+    description: "โปรเจกต์เว็บไซต์ร้านเสริมสวย พร้อมหน้าแสดงแบรนด์และบริการ",
+    techStack: ["HTML", "CSS", "JavaScript"],
+    githubUrl: "https://github.com/Numcha1/Slon",
+    imageUrl: "/slon.png"
   }
 ];
 
