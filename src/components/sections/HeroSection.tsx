@@ -27,16 +27,6 @@ export const HeroSection = () => {
           </Link>
         </div>
 
-        {content.highlights.length > 0 ? (
-          <div className="mt-7 grid gap-3 sm:grid-cols-3">
-            {content.highlights.map((item) => (
-              <div key={item.label} className="rounded-xl border border-border/70 bg-surfaceAlt/60 p-3 text-center">
-                <p className="text-xs uppercase tracking-[0.16em] text-muted">{item.label}</p>
-                <p className="mt-1 text-lg font-semibold text-white">{item.value}</p>
-              </div>
-            ))}
-          </div>
-        ) : null}
       </Reveal>
     </section>
   );
