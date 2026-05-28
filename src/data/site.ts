@@ -11,7 +11,7 @@ export const DEFAULT_SITE_CONTENT: SiteContent = {
     description:
       "Portfolio website of Patiphan Meelapsuang, Full Stack and IoT Developer.",
     email: "waterza184641@gmail.com",
-    phone: "+66 00 000 0000",
+    phone: "+66 62 670 4442",
     location: "Thailand",
     resumeUrl: fallbackResumeUrl
   },
