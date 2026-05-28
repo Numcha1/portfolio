@@ -41,9 +41,7 @@ const writeSiteContentCache = (content: SiteContent) => {
 };
 
 export const useSiteContent = () => {
-  const [content, setContent] = useState<SiteContent>(
-    () => readSiteContentCache() ?? DEFAULT_SITE_CONTENT
-  );
+  const [content, setContent] = useState<SiteContent>(DEFAULT_SITE_CONTENT);
   const [isLoading, setIsLoading] = useState(false);
 
   const refresh = useCallback(async () => {
@@ -92,6 +90,12 @@ export const useSiteContent = () => {
   }, []);
 
   useEffect(() => {
+    const cached = readSiteContentCache();
+
+    if (cached) {
+      setContent(cached);
+    }
+
     void refresh();
   }, [refresh]);
 
