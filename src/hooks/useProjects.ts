@@ -188,13 +188,17 @@ const mergeProjects = (primary: Project[], fallback: Project[]) => {
 };
 
 export const useProjects = ({ limit }: UseProjectsOptions = {}) => {
-  const [projects, setProjects] = useState<Project[]>(() =>
-    mergeProjects(readProjectsCache() ?? [], SAMPLE_PROJECTS)
-  );
-  const [isLoading, setIsLoading] = useState(projects.length === 0);
+  const [projects, setProjects] = useState<Project[]>(SAMPLE_PROJECTS);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     let mounted = true;
+
+    const cachedProjects = readProjectsCache();
+
+    if (cachedProjects && mounted) {
+      setProjects(mergeProjects(cachedProjects, SAMPLE_PROJECTS));
+    }
 
     const loadProjects = async () => {
       if (!supabase) {

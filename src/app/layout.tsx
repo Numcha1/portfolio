@@ -45,6 +45,9 @@ export const metadata: Metadata = {
     title: `${SITE_CONFIG.name} | Portfolio`,
     description: SITE_CONFIG.description
   },
+  icons: {
+    icon: "/project-placeholder.svg"
+  },
   robots: {
     index: true,
     follow: true
