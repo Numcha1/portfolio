@@ -59,6 +59,7 @@ cp .env.example .env.local
 
 - Public read only: `supabase/projects_public_read_policy.sql`
 - Public read + admin write: `supabase/projects_admin_access.sql`
+- Site content table + admin write: `supabase/site_content_admin_access.sql`
   - Replace `YOUR_ADMIN_USER_ID` in SQL before running.
   - This keeps portfolio pages public, but only your admin account can edit.
 
@@ -71,3 +72,4 @@ npm run dev
 6. Open admin page
 
 - `http://localhost:3000/admin`
+- You can edit both project data and all core site content in this page.

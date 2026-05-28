@@ -12,3 +12,8 @@ export type SkillGroup = {
   title: string;
   skills: string[];
 };
+
+export type HighlightItem = {
+  label: string;
+  value: string;
+};

@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import type { Session } from "@supabase/supabase-js";
 
+import { ContentAdminPanel } from "@/components/admin/ContentAdminPanel";
 import { isSupabaseConfigured, supabase } from "../../../lib/supabase";
 
 type ProjectForm = {
@@ -97,7 +98,7 @@ export const AdminPageClient = () => {
   const [projects, setProjects] = useState<AdminProject[]>([]);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [form, setForm] = useState<ProjectForm>(EMPTY_FORM);
-  const [email, setEmail] = useState("");
+  const [loginId, setLoginId] = useState("");
   const [password, setPassword] = useState("");
   const [notice, setNotice] = useState<string>("");
   const [errorText, setErrorText] = useState<string>("");
@@ -257,8 +258,8 @@ export const AdminPageClient = () => {
       return;
     }
 
-    if (!email.trim() || !password.trim()) {
-      setErrorText("Please enter email and password");
+    if (!loginId.trim() || !password.trim()) {
+      setErrorText("Please enter ID and password");
       return;
     }
 
@@ -266,7 +267,7 @@ export const AdminPageClient = () => {
     setNotice("");
 
     const { error } = await client.auth.signInWithPassword({
-      email: email.trim(),
+      email: loginId.trim(),
       password
     });
 
@@ -276,36 +277,6 @@ export const AdminPageClient = () => {
     }
 
     setNotice("Signed in");
-  };
-
-  const sendMagicLink = async () => {
-    const client = supabase;
-
-    if (!client) {
-      return;
-    }
-
-    if (!email.trim()) {
-      setErrorText("Please enter email first");
-      return;
-    }
-
-    setErrorText("");
-    setNotice("");
-
-    const { error } = await client.auth.signInWithOtp({
-      email: email.trim(),
-      options: {
-        emailRedirectTo: `${window.location.origin}/admin`
-      }
-    });
-
-    if (error) {
-      setErrorText(`Failed to send magic link: ${error.message}`);
-      return;
-    }
-
-    setNotice("Magic link sent. Check your email.");
   };
 
   const signOut = async () => {
@@ -479,16 +450,24 @@ export const AdminPageClient = () => {
           <div className="max-w-xl space-y-4 rounded-2xl border border-border/70 bg-surfaceAlt/50 p-5">
             <div className="space-y-1">
               <h2 className="font-heading text-lg font-semibold text-white">Sign In</h2>
-              <p className="text-sm text-muted">Use the account you want to allow as admin.</p>
+              <p className="text-sm text-muted">
+                Sign in with your admin ID (Supabase email) and password.
+              </p>
             </div>
 
-            <div className="grid gap-3">
+            <form
+              className="grid gap-3"
+              onSubmit={(event) => {
+                event.preventDefault();
+                void signInWithPassword();
+              }}
+            >
               <input
                 className="input"
-                type="email"
-                placeholder="Email"
-                value={email}
-                onChange={(event) => setEmail(event.target.value)}
+                type="text"
+                placeholder="ID (email)"
+                value={loginId}
+                onChange={(event) => setLoginId(event.target.value)}
               />
               <input
                 className="input"
@@ -497,16 +476,10 @@ export const AdminPageClient = () => {
                 value={password}
                 onChange={(event) => setPassword(event.target.value)}
               />
-            </div>
-
-            <div className="flex flex-wrap gap-2">
-              <button type="button" onClick={signInWithPassword} className="btn-primary">
-                Sign In (Password)
+              <button type="submit" className="btn-primary">
+                Sign In
               </button>
-              <button type="button" onClick={sendMagicLink} className="btn-secondary">
-                Send Magic Link
-              </button>
-            </div>
+            </form>
           </div>
         ) : null}
 
@@ -521,109 +494,113 @@ export const AdminPageClient = () => {
         ) : null}
 
         {session && isAdmin ? (
-          <div className="grid gap-5 lg:grid-cols-[1.05fr,1.4fr]">
-            <form
-              onSubmit={submitForm}
-              className="space-y-3 rounded-2xl border border-border/70 bg-surfaceAlt/50 p-5"
-            >
-              <h2 className="font-heading text-lg font-semibold text-white">
-                {editingId ? "Edit Project" : "Add Project"}
-              </h2>
+          <div className="space-y-5">
+            <ContentAdminPanel />
 
-              <input
-                className="input"
-                placeholder="Project title"
-                value={form.title}
-                onChange={(event) => setForm((prev) => ({ ...prev, title: event.target.value }))}
-                required
-              />
+            <div className="grid gap-5 lg:grid-cols-[1.05fr,1.4fr]">
+              <form
+                onSubmit={submitForm}
+                className="space-y-3 rounded-2xl border border-border/70 bg-surfaceAlt/50 p-5"
+              >
+                <h2 className="font-heading text-lg font-semibold text-white">
+                  {editingId ? "Edit Project" : "Add Project"}
+                </h2>
 
-              <textarea
-                className="textarea"
-                placeholder="Description"
-                value={form.description}
-                onChange={(event) => setForm((prev) => ({ ...prev, description: event.target.value }))}
-              />
+                <input
+                  className="input"
+                  placeholder="Project title"
+                  value={form.title}
+                  onChange={(event) => setForm((prev) => ({ ...prev, title: event.target.value }))}
+                  required
+                />
 
-              <input
-                className="input"
-                placeholder="Tech stack (comma separated)"
-                value={form.techStack}
-                onChange={(event) => setForm((prev) => ({ ...prev, techStack: event.target.value }))}
-              />
+                <textarea
+                  className="textarea"
+                  placeholder="Description"
+                  value={form.description}
+                  onChange={(event) => setForm((prev) => ({ ...prev, description: event.target.value }))}
+                />
 
-              <input
-                className="input"
-                placeholder="GitHub URL"
-                value={form.githubUrl}
-                onChange={(event) => setForm((prev) => ({ ...prev, githubUrl: event.target.value }))}
-              />
+                <input
+                  className="input"
+                  placeholder="Tech stack (comma separated)"
+                  value={form.techStack}
+                  onChange={(event) => setForm((prev) => ({ ...prev, techStack: event.target.value }))}
+                />
 
-              <input
-                className="input"
-                placeholder="Image URL or /image.png"
-                value={form.imageUrl}
-                onChange={(event) => setForm((prev) => ({ ...prev, imageUrl: event.target.value }))}
-              />
+                <input
+                  className="input"
+                  placeholder="GitHub URL"
+                  value={form.githubUrl}
+                  onChange={(event) => setForm((prev) => ({ ...prev, githubUrl: event.target.value }))}
+                />
 
-              <div className="flex flex-wrap gap-2 pt-1">
-                <button type="submit" className="btn-primary" disabled={isSaving}>
-                  {isSaving ? "Saving..." : editingId ? "Update Project" : "Add Project"}
-                </button>
+                <input
+                  className="input"
+                  placeholder="Image URL or /image.png"
+                  value={form.imageUrl}
+                  onChange={(event) => setForm((prev) => ({ ...prev, imageUrl: event.target.value }))}
+                />
 
-                {editingId ? (
-                  <button
-                    type="button"
-                    className="btn-secondary"
-                    onClick={() => {
-                      setEditingId(null);
-                      setForm(EMPTY_FORM);
-                    }}
-                  >
-                    Cancel Edit
+                <div className="flex flex-wrap gap-2 pt-1">
+                  <button type="submit" className="btn-primary" disabled={isSaving}>
+                    {isSaving ? "Saving..." : editingId ? "Update Project" : "Add Project"}
                   </button>
+
+                  {editingId ? (
+                    <button
+                      type="button"
+                      className="btn-secondary"
+                      onClick={() => {
+                        setEditingId(null);
+                        setForm(EMPTY_FORM);
+                      }}
+                    >
+                      Cancel Edit
+                    </button>
+                  ) : null}
+                </div>
+              </form>
+
+              <div className="space-y-3 rounded-2xl border border-border/70 bg-surfaceAlt/50 p-5">
+                <div className="flex items-center justify-between gap-3">
+                  <h2 className="font-heading text-lg font-semibold text-white">Project List</h2>
+                  <button type="button" className="btn-secondary" onClick={() => void loadProjects()}>
+                    Refresh
+                  </button>
+                </div>
+
+                {isLoadingProjects ? <p className="text-sm text-muted">Loading projects...</p> : null}
+
+                {!isLoadingProjects && sortedProjects.length === 0 ? (
+                  <p className="text-sm text-muted">No projects found in the table.</p>
                 ) : null}
-              </div>
-            </form>
 
-            <div className="space-y-3 rounded-2xl border border-border/70 bg-surfaceAlt/50 p-5">
-              <div className="flex items-center justify-between gap-3">
-                <h2 className="font-heading text-lg font-semibold text-white">Project List</h2>
-                <button type="button" className="btn-secondary" onClick={() => void loadProjects()}>
-                  Refresh
-                </button>
-              </div>
+                <div className="space-y-3">
+                  {sortedProjects.map((project) => (
+                    <article key={project.id} className="rounded-xl border border-border/70 bg-surface/60 p-4">
+                      <h3 className="font-heading text-base font-semibold text-white">{project.title}</h3>
+                      <p className="mt-1 text-sm text-muted">{project.description || "-"}</p>
+                      <p className="mt-2 text-xs text-primarySoft">{project.techStack || "-"}</p>
+                      <p className="mt-2 truncate text-xs text-muted">{project.githubUrl || "-"}</p>
+                      <p className="mt-1 truncate text-xs text-muted">{project.imageUrl || "-"}</p>
 
-              {isLoadingProjects ? <p className="text-sm text-muted">Loading projects...</p> : null}
-
-              {!isLoadingProjects && sortedProjects.length === 0 ? (
-                <p className="text-sm text-muted">No projects found in the table.</p>
-              ) : null}
-
-              <div className="space-y-3">
-                {sortedProjects.map((project) => (
-                  <article key={project.id} className="rounded-xl border border-border/70 bg-surface/60 p-4">
-                    <h3 className="font-heading text-base font-semibold text-white">{project.title}</h3>
-                    <p className="mt-1 text-sm text-muted">{project.description || "-"}</p>
-                    <p className="mt-2 text-xs text-primarySoft">{project.techStack || "-"}</p>
-                    <p className="mt-2 truncate text-xs text-muted">{project.githubUrl || "-"}</p>
-                    <p className="mt-1 truncate text-xs text-muted">{project.imageUrl || "-"}</p>
-
-                    <div className="mt-3 flex flex-wrap gap-2">
-                      <button type="button" className="btn-secondary" onClick={() => startEdit(project)}>
-                        Edit
-                      </button>
-                      <button
-                        type="button"
-                        className="btn-primary"
-                        onClick={() => void removeProject(project)}
-                        disabled={busyDeleteId === project.id}
-                      >
-                        {busyDeleteId === project.id ? "Deleting..." : "Delete"}
-                      </button>
-                    </div>
-                  </article>
-                ))}
+                      <div className="mt-3 flex flex-wrap gap-2">
+                        <button type="button" className="btn-secondary" onClick={() => startEdit(project)}>
+                          Edit
+                        </button>
+                        <button
+                          type="button"
+                          className="btn-primary"
+                          onClick={() => void removeProject(project)}
+                          disabled={busyDeleteId === project.id}
+                        >
+                          {busyDeleteId === project.id ? "Deleting..." : "Delete"}
+                        </button>
+                      </div>
+                    </article>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
